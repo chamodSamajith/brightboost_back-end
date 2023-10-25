@@ -32,9 +32,10 @@ app.use(cors());
 
 var UserRoute = require('./Routes/StudentRoutes')
 var TutorRoute = require('./Routes/TutorRoutes')
+var SessionRoute = require('./Routes/SessionRoutes')
 app.use('/api/users', UserRoute);
 app.use('/api/tutors', TutorRoute);
-
+app.use('/api/session', SessionRoute);
 
 app.listen(3200, () => {
     console.log("server is listening on port 3200")
