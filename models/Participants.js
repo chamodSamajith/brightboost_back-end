@@ -1,16 +1,19 @@
 var mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const participantSchema = new Schema({
+const participantSchema = new schema({
     sessionId: { 
-        type: Schema.Types.ObjectId, 
+        type: schema.Types.ObjectId, 
         ref: 'Session', 
         required: true 
     },
     userId: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'User', 
-        required: true 
+        type: schema.Types.ObjectId, 
+        ref: 'Students', 
+    },
+    hostId: { 
+        type: schema.Types.ObjectId, 
+        ref: 'Tutor', 
     },
     joinTime: { 
         type: String, 
@@ -22,6 +25,10 @@ const participantSchema = new Schema({
         enum: ['host', 'co-host', 'attendee'], 
         required: true 
     },
-    otherFields: String 
+    otherFields: String,
+    status: {
+        type: Boolean,
+        required: true
+    }, 
   });
 module.exports = Participant = mongoose.model('Participants', participantSchema)
