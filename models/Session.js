@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const sessionSchema = new schema({
-    hostUserId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    hostUserId: { type: schema.Types.ObjectId, ref: 'Tutor', required: true },
     sessionName: {
         type: String,
         required: true
@@ -21,6 +21,9 @@ const sessionSchema = new schema({
     },
     maximumParticipants: {
         type: Number,
+        required: true
+    },sessionSubject:{
+        type: String,
         required: true
     }
 })
