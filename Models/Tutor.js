@@ -2,37 +2,17 @@ var mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const Tutorchema = new schema({
-    TutorFName: {
+    TutorName: {
         type: String,
         required: true
     },
-    TutorLName: {
+    TutorSubject: {
         type: String,
         required: true
     },
-    TutorAge: {
+    TutorTime: {
         type: Number,
         required: true
     },
-    TutorAddress: {
-        type: String,
-        required: true
-    },
-    TutorEmail: {
-        type: String,
-        required: true
-    },
-    TutorPassword: {
-        type: String,
-        required: true
-    },
-    TutorPhone: {
-        type: Number,
-        required: true
-    },
-    AssignedClasses: {
-        type: [Object],
-        required: false
-    }
 })
 module.exports = Tutor = mongoose.model('Tutor', Tutorchema)

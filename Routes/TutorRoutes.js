@@ -13,13 +13,9 @@ const Tutor = require('../Models/Tutor')
 router.post('/create', (req, res) => {
 
     const tutor = new Tutor({
-        TutorFName: req.body.TutorFName,
-        TutorLName: req.body.TutorLName,
-        TutorAge: req.body.TutorAge,
-        TutorAddress: req.body.TutorAddress,
-        TutorEmail: req.body.TutorEmail,
-        TutorPassword: req.body.TutorPassword,
-        TutorPhone: req.body.TutorPhone
+        TutorName: req.body.TutorFName,
+        TutorSubject: req.body.TutorSubject,
+        TutorTime: req.body.TutorTime,
     })
     tutor.save().then(tut => {
         try {
