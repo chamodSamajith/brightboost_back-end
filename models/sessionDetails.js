@@ -3,17 +3,13 @@ const schema = mongoose.Schema;
 
 const sessionDetailSchema = new schema({
     sessionId: { 
-        type: Schema.Types.ObjectId, 
+        type: schema.Types.ObjectId, 
         ref: 'Session', 
         required: true 
     },
     eventType: { 
         type: String, 
         required: true 
-    },
-    userId: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'User' 
     },
     timestamp: { 
         type: String, 
