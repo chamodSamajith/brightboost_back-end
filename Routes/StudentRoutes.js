@@ -2,7 +2,6 @@ var express = require('express')
 var router = express.Router();
 const Student = require('../Models/Student')
 
-
 /*
     method : POST
     description : create new student
@@ -69,5 +68,16 @@ router.post('/studentLogin', (req, res) => {
 
     })
 })
+
+// get all students
+router.get('/', async (req, res) => {
+    try {
+        const Students = await Student.find();
+        res.json(Students);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;
