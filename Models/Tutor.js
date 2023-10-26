@@ -11,7 +11,7 @@ const Tutorchema = new schema({
         required: true
     },
     TutorTime: {
-        type: Number,
+        type: String,
         required: true
     },
 })
