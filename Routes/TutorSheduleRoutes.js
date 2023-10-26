@@ -1,19 +1,18 @@
 var express = require('express')
 var router = express.Router();
-const Tutor = require('../Models/TutorDetails')
+const TutorShedule = require('../Models/TutorShedule')
 
 //insert tutor shedule
 router.post('/create', (req, res) => {
 
-    const tutor = new Tutor({
-        TutorNames: req.body.TutorNames,
+    const tutorShedule = new TutorShedule({
+        TutorName: req.body.TutorName,
         SessionSubject: req.body.SessionSubject,
         SessionTimePeriodStart: req.body.SessionTimePeriodStart,
         SessionTimePeriodEnd: req.body.SessionTimePeriodEnd,
         sessionName: req.body.sessionName,
-        maximumParticipants: req.body.maximumParticipants,
     })
-    tutor.save().then(tut => {
+    tutorShedule.save().then(tut => {
         try {
             res.status(200).send({
                 message: 'TutorDetails inserted successfully !',
@@ -32,7 +31,7 @@ router.post('/create', (req, res) => {
 
 //get all tutor schedules
 router.get('/getAll', (req, res) => {
-    Tutor.find()
+    TutorShedule.find()
         .then(schedules => {
             res.status(200).send({
                 message: 'Tutor Schedules retrieved successfully!',
@@ -51,7 +50,7 @@ router.get('/getAll', (req, res) => {
 router.get('/getById/:id', (req, res) => {
     const scheduleId = req.params.id;
 
-    Tutor.findById(scheduleId)
+    TutorShedule.findById(scheduleId)
         .then(schedule => {
             if (!schedule) {
                 return res.status(404).send({
@@ -75,7 +74,7 @@ router.get('/getById/:id', (req, res) => {
 router.put('/update/:id', (req, res) => {
     const scheduleId = req.params.id;
 
-    Tutor.findByIdAndUpdate(scheduleId, req.body, { new: true })
+    TutorShedule.findByIdAndUpdate(scheduleId, req.body, { new: true })
         .then(updatedSchedule => {
             if (!updatedSchedule) {
                 return res.status(404).send({
@@ -99,7 +98,7 @@ router.put('/update/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     const scheduleId = req.params.id;
 
-    Tutor.findByIdAndRemove(scheduleId)
+    TutorShedule.findByIdAndRemove(scheduleId)
         .then(deletedSchedule => {
             if (!deletedSchedule) {
                 return res.status(404).send({

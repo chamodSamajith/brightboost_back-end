@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const TutorSheduleschema = new schema({
-    TutorNames: {
-        type: [String],
+    TutorName: {
+        type: String,
         required: true
     },
     SessionSubject: {
@@ -21,10 +21,6 @@ const TutorSheduleschema = new schema({
     sessionName: {
         type: String,
         required: true
-    },
-    maximumParticipants: {
-        type: String,
-        required: true
     }
 })
-module.exports = Tutor = mongoose.model('TutorDetails', TutorSheduleschema)
+module.exports = Tutor = mongoose.model('TutorShedule', TutorSheduleschema)
