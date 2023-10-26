@@ -8,7 +8,8 @@ router.post('/create', (req, res) => {
     const tutor = new Tutor({
         TutorName: req.body.TutorName,
         TutorSubjects: req.body.TutorSubjects,
-        AvailableDateTIme: req.body.AvailableDateTIme,
+        AvailableDateTimeFrom: req.body.AvailableDateTimeFrom,
+        AvailableDateTimeTo: req.body.AvailableDateTimeTo,
     })
     tutor.save().then(tut => {
         try {
