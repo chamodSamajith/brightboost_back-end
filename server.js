@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 
 //DB connection
 
-const dbURL = "mongodb+srv://chamika:Asd123+++@afcluster1-3t6tc.mongodb.net/test";
+const dbURL = "mongodb+srv://chamika:Asd123+++@afcluster1-3t6tc.mongodb.net/BrightBoost";
 
 mongoose
     .connect(dbURL, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
@@ -33,9 +33,12 @@ app.use(cors());
 var UserRoute = require('./Routes/StudentRoutes')
 var TutorRoute = require('./Routes/TutorRoutes')
 var SessionRoute = require('./Routes/SessionRoutes')
+var questionsRoutes = require('./Routes/questionRoutes')
+
 app.use('/api/users', UserRoute);
 app.use('/api/tutors', TutorRoute);
 app.use('/api/session', SessionRoute);
+app.use('/api/questions', questionsRoutes);
 
 app.listen(3200, () => {
     console.log("server is listening on port 3200")
