@@ -4,6 +4,6 @@ const subjectSchema = new mongoose.Schema({
     name: String
 });
 
-const Subject = mongoose.model('questions', subjectSchema);
+const Subject = mongoose.model('subjects', subjectSchema);
 
 module.exports = Subject;
