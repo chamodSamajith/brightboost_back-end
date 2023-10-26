@@ -10,7 +10,11 @@ const TutorDetailschema = new schema({
         type: [String],
         required: true
     },
-    AvailableDateTIme: {
+    AvailableDateTImeFrom: {
+        type: String,
+        required: true
+    },
+    AvailableDateTImeTo: {
         type: String,
         required: true
     }
