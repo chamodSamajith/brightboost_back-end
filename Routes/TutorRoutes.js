@@ -80,4 +80,13 @@ router.get('/', async (req, res) => {
     }
 });
 
+// get all Tutors - Chamika
+
+router.get('/getAllTutorInfo', (req, res) => {
+    const Tutors = Tutor.find().then(Tutors => {
+        res.send(Tutors);
+    })
+    console.log("tut: ",Tutors)
+})
+
 module.exports = router;
