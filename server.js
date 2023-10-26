@@ -34,11 +34,13 @@ var UserRoute = require('./Routes/StudentRoutes')
 var TutorRoute = require('./Routes/TutorRoutes')
 var SessionRoute = require('./Routes/SessionRoutes')
 var questionsRoutes = require('./Routes/questionRoutes')
+var subjectRoutes = require('./Routes/subjectRoutes')
 
 app.use('/api/users', UserRoute);
 app.use('/api/tutors', TutorRoute);
 app.use('/api/session', SessionRoute);
 app.use('/api/questions', questionsRoutes);
+app.use('/api/subjects', subjectRoutes);
 
 app.listen(3200, () => {
     console.log("server is listening on port 3200")
