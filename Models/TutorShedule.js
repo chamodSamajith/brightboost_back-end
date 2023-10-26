@@ -10,7 +10,11 @@ const TutorSheduleschema = new schema({
         type: String,
         required: true
     },
-    SessionTimePeriod: {
+    SessionTimePeriodStart: {
+        type: String,
+        required: true
+    },
+    SessionTimePeriodEnd: {
         type: String,
         required: true
     },
