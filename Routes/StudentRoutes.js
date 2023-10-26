@@ -24,7 +24,8 @@ router.post('/create', (req, res) => {
         try {
             res.status(200).send({
                 message: 'Student created successfully !',
-                data: stu
+                data: stu,
+                messageCode : 1000
             })
 
         } catch (err) {
