@@ -2,7 +2,6 @@ var express = require('express')
 var router = express.Router();
 const Tutor = require('../Models/Tutor')
 
-
 /*
     method : POST
     description : create new Tutor
@@ -69,5 +68,16 @@ router.post('/tutorLogin', (req, res) => {
 
     })
 })
+
+// get all tutors
+router.get('/', async (req, res) => {
+    try {
+        const Tutors = await Tutor.find();
+        res.json(Tutors);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;
