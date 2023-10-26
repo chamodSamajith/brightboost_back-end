@@ -221,6 +221,28 @@ router.get('/session-details/:sessionId', (req, res) => {
 })
 
 
+router.get('/session-attendance/:sessionId', (req, res) => {
+
+    const sessionIdToSearch = req.params.sessionId; 
+
+    getUniqueParticipantCount(sessionIdToSearch, (err, count, participants) => {
+        if (err) {
+            res.status(502).send({
+                message: 'OOPS! Server error',
+                error: err,
+                status:201
+            });
+        } else {
+            res.status(200).send({
+                status: 200,
+                message: 'Success',
+                data: participants,
+                count:count
+            });
+        }
+    });
+})
+
 const createLogs=(id,event,time,eventdata)=>{
 
     const sessionDetails = new SessionDetails({
@@ -237,6 +259,37 @@ const createLogs=(id,event,time,eventdata)=>{
         }
 
     })
+}
+
+const getUniqueParticipantCount=(sessionId, callback)=> {
+    Participant.find({ sessionId }, (err, participants) => {
+        if (err) {
+            return callback(err);
+        }
+        
+        const uniqueParticipantsMap = new Map();
+        
+        participants.forEach(participant => {
+            if (participant.userId) {
+                uniqueParticipantsMap.set(participant.userId.toString(), {
+                    userId: participant.userId,
+                    participantRole: participant.participantRole,
+                });
+            }
+            
+            if (participant.hostId) {
+                uniqueParticipantsMap.set(participant.hostId.toString(), {
+                    hostId: participant.hostId,
+                    participantRole: participant.participantRole,
+                });
+            }
+        });
+        
+        const uniqueParticipants = Array.from(uniqueParticipantsMap.values());
+        const count = uniqueParticipants.length;
+        
+        return callback(null, count, uniqueParticipants);
+    });
 }
 
 
