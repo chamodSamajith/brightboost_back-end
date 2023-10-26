@@ -7,6 +7,7 @@ const questionSchema = new mongoose.Schema({
     subjectId: String,
     tutorId: String,
     studentId: String,
+    sessionId: String
 });
 
 const Question = mongoose.model('questions', questionSchema);

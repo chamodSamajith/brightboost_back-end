@@ -16,9 +16,9 @@ questionRouter.get('/', async (req, res) => {
 // save questions
 questionRouter.post('/', async (req, res) => {
     try {
-        const { question, answer, comment, subjectId, tutorId, studentId } = req.body;
+        const { question, answer, comment, subjectId, tutorId, studentId, sessionId } = req.body;
 
-        const questionObj = new Question({ question, answer, comment, subjectId, tutorId, studentId });
+        const questionObj = new Question({ question, answer, comment, subjectId, tutorId, studentId, sessionId });
         const savedQuestion = await questionObj.save();
         res.json(savedQuestion);
     } catch (err) {
@@ -31,12 +31,12 @@ questionRouter.post('/', async (req, res) => {
 questionRouter.put('/:questionId', async (req, res) => {
     try {
         const questionId = req.params.questionId;
-        const { question, answer, comment, subjectId, tutorId, studentId } = req.body;
+        const { question, answer, comment, subjectId, tutorId, studentId, sessionId } = req.body;
 
-        const updatedQuestion = await Question.findByIdAndUpdate(questionId, { question, answer, comment, subjectId, tutorId, studentId }, { new: true });
+        const updatedQuestion = await Question.findByIdAndUpdate(questionId, { question, answer, comment, subjectId, tutorId, studentId, sessionId }, { new: true });
 
         if (!updatedQuestion) {
-            return res.status(404).json({ error: 'Product not found' });
+            return res.status(404).json({ error: 'Question not found' });
         }
 
         res.json(updatedQuestion);
@@ -54,7 +54,7 @@ questionRouter.delete('/:questionId', async (req, res) => {
         const deletedQuestion = await Question.findByIdAndRemove(questionId);
 
         if (!deletedQuestion) {
-            return res.status(404).json({ error: 'Product not found' });
+            return res.status(404).json({ error: 'Question not found' });
         }
 
         res.json(deletedQuestion);
