@@ -44,7 +44,6 @@ router.get('/getAll', (req, res) => {
         });
 });
 
-//update API
 // Update a tutor by ID
 router.put('/update/:id', (req, res) => {
     const tutorId = req.params.id;
@@ -74,7 +73,6 @@ router.put('/update/:id', (req, res) => {
         });
 });
 
-//deete tutor
 // Delete a tutor by ID
 router.delete('/delete/:id', (req, res) => {
     const tutorId = req.params.id;
