@@ -80,4 +80,24 @@ router.get('/', async (req, res) => {
     }
 });
 
+/*
+    method : GET
+    description : get all Students
+  
+*/
+router.get('/all', (req, res) => {
+    // Use the `find` method to fetch all students
+    Student.find().then(studentlist => {
+        // Send the response inside the promise block
+        res.send(studentlist);
+        
+        // This console.log will display the data you just sent
+        console.log(studentlist);
+    }).catch(err => {
+        // Handle any errors that might occur during the database query
+        console.error(err);
+        res.status(500).send("An error occurred while fetching student data.");
+    });
+});
+
 module.exports = router;
