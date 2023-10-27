@@ -1,6 +1,29 @@
 var express = require('express');
 var questionRouter = express.Router();
 const Question = require('../Models/Question');
+const Subject = require('../Models/Subject')
+
+// Get questions count by subject
+questionRouter.get('/questions-count-by-subject', async (req, res) => {
+    try {
+        const subjects = await Subject.find({});
+
+        const questionsCountBySubject = await Promise.all(
+            subjects.map(async (subject) => {
+                const count = await Question.countDocuments({ subjectId: subject._id });
+                return {
+                    subjectName: subject.subjectName,
+                    questionCount: count,
+                };
+            })
+        );
+
+        res.json(questionsCountBySubject);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching data' });
+    }
+});
 
 // get all questions
 questionRouter.get('/', async (req, res) => {
