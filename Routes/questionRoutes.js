@@ -76,9 +76,8 @@ questionRouter.post('/create', async (req, res) => {
 questionRouter.put('/:questionId', async (req, res) => {
     try {
         const questionId = req.params.questionId;
-        const {  answer, comment, subjectId, tutorId, studentId, sessionId } = req.body;
-
-        const updatedQuestion = await Question.findByIdAndUpdate(questionId, { answer }, { new: true });
+        const {answer} = req.body;
+        const updatedQuestion = await Question.findByIdAndUpdate(questionId, { answer,status : "Answered" }, { new: true });
 
         if (!updatedQuestion) {
             return res.status(404).json({ error: 'Question not found' });
