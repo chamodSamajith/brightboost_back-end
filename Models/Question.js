@@ -7,9 +7,8 @@ const questionSchema = new mongoose.Schema({
     subjectId: String,
     tutorId: String,
     studentId: String,
-    sessionId: String
+    sessionId: String,
+    status:String
 });
 
-const Question = mongoose.model('questions', questionSchema);
-
-module.exports = Question;
+module.exports = Question = mongoose.model('question', questionSchema)
