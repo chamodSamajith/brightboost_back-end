@@ -13,14 +13,59 @@ questionRouter.get('/', async (req, res) => {
     }
 });
 
-// save questions
-questionRouter.post('/', async (req, res) => {
+// Update the route to get questions by email
+questionRouter.get('/:email', async (req, res) => {
+    const { email } = req.params; // Get the email parameter from the URL
+  
     try {
-        const { question, answer, comment, subjectId, tutorId, studentId, sessionId } = req.body;
+      // Find questions that match the email
+      const questions = await Question.find({ studentId: email });
+  
+      if (questions.length === 0) {
+        // If no questions match the email, return a 404 status
+        return res.status(404).json({ message: 'No questions found for the specified email.' });
+      }
+  
+      // If questions are found, return them as JSON
+      res.json({ questions, email: email });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
-        const questionObj = new Question({ question, answer, comment, subjectId, tutorId, studentId, sessionId });
-        const savedQuestion = await questionObj.save();
-        res.json(savedQuestion);
+// save questions
+questionRouter.post('/create', async (req, res) => {
+    try {
+        // const { question, subjectId, tutorId, studentId, sessionId } = req.body;
+
+        const que = new Question({
+            question: req.body.question,
+            subjectId: req.body.subjectId,
+            tutorId: req.body.tutorId,
+            studentId: req.body.studentId,
+            sessionId: req.body.sessionId,
+            answer:req.body.answer,
+            status:req.body.status
+        })
+        
+        que.save().then(tut => {
+            try {
+                res.status(200).send({
+                    message: 'Questtion created successfully !',
+                    data: tut,
+                    messageCode : 1000
+                })
+    
+            } catch (err) {
+                res.status(502).send({
+                    message: 'OOPS ! server error',
+                    error: err
+                })
+            }
+    
+        })
+        
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -31,9 +76,8 @@ questionRouter.post('/', async (req, res) => {
 questionRouter.put('/:questionId', async (req, res) => {
     try {
         const questionId = req.params.questionId;
-        const { question, answer, comment, subjectId, tutorId, studentId, sessionId } = req.body;
-
-        const updatedQuestion = await Question.findByIdAndUpdate(questionId, { question, answer, comment, subjectId, tutorId, studentId, sessionId }, { new: true });
+        const {answer} = req.body;
+        const updatedQuestion = await Question.findByIdAndUpdate(questionId, { answer,status : "Answered" }, { new: true });
 
         if (!updatedQuestion) {
             return res.status(404).json({ error: 'Question not found' });

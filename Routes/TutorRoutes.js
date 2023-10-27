@@ -24,7 +24,8 @@ router.post('/create', (req, res) => {
         try {
             res.status(200).send({
                 message: 'Tutor created successfully !',
-                data: tut
+                data: tut,
+                messageCode : 1000
             })
 
         } catch (err) {
@@ -79,5 +80,14 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// get all Tutors - Chamika
+
+router.get('/getAllTutorInfo', (req, res) => {
+    const Tutors = Tutor.find().then(Tutors => {
+        res.send(Tutors);
+    })
+    console.log("tut: ",Tutors)
+})
 
 module.exports = router;
